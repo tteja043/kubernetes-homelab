@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-html
+  namespace: homelab
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Tarun's Kubernetes Homelab</title>
+    </head>
+    <body>
+      <h1>Tarun's Kubernetes Homelab</h1>
+      <p>Project 2 - ConfigMap Demo</p>
+      <p>Running on Minikube</p>
+    </body>
+    </html>
