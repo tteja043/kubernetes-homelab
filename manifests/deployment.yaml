@@ -17,10 +17,23 @@ spec:
       - name: nginx
         image: nginx:latest
         ports:
-        - containerPort: 80
+        - containerPort: 80     
         volumeMounts:
         - name: nginx-storage
           mountPath: /usr/share/nginx/html
+
+        env:
+        - name: APP_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: nginx-secret
+              key: username
+        - name: APP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: nginx-secret
+              key: password
+     
       volumes:
       - name: nginx-storage
         persistentVolumeClaim:
