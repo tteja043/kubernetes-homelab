@@ -1,0 +1,22 @@
+replicaCount: 3
+
+image:
+  repository: nginx
+  tag: latest
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 80
+
+namespace: homelab
+
+ingress:
+  enabled: true
+  host: nginx.local
+
+storage:
+  pvcName: nginx-pvc
+
+secret:
+  name: nginx-secret
