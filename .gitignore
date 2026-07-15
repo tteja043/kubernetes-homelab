@@ -1,2 +1,4 @@
 .DS_Store
 *.log
+secret.yaml
+prometheus-values.yaml
