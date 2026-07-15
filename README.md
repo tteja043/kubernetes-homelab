@@ -1,214 +1,240 @@
-# Kubernetes Homelab
+# Kubernetes Homelab 🚀
 
-## Overview
+A hands-on Kubernetes Homelab built on **Minikube** to learn Kubernetes administration, Helm, storage, networking, and platform engineering concepts.
 
-This repository documents my hands-on Kubernetes learning journey using a local homelab built with **Minikube**. The goal is to gain practical experience with core Kubernetes concepts by building, deploying, and managing applications while following production-oriented best practices.
-
-Each project builds upon the previous one, introducing a new Kubernetes concept and demonstrating how different resources work together.
+The goal of this repository is to build production-oriented Kubernetes skills by implementing one project at a time while following infrastructure-as-code and GitOps principles.
 
 ---
 
-## Environment
+## 🛠️ Environment
 
 * Kubernetes (Minikube)
-* Docker Driver
-* macOS
+* Docker Desktop
 * kubectl
+* Helm
+* VS Codium
+* Git & GitHub
 * NGINX
 
 ---
 
-# Project Roadmap
+# 📚 Projects
 
-| Project     | Status    | Topics Covered                                                              |
-| ----------- | --------- | --------------------------------------------------------------------------- |
-| ✅ Project 1 | Completed | Namespace, Deployment, Service, Ingress                                     |
-| ✅ Project 2 | Completed | ConfigMaps, Volume Mounts, Custom NGINX Homepage                            |
-| ✅ Project 3 | Completed | Persistent Volumes (PV), Persistent Volume Claims (PVC), Persistent Storage |
-| ⏳ Project 4 | Planned   | Kubernetes Secrets                                                          |
-| ⏳ Project 5 | Planned   | Helm Charts                                                                 |
-| ⏳ Project 6 | Planned   | Prometheus & Grafana                                                        |
-| ⏳ Project 7 | Planned   | Argo CD (GitOps)                                                            |
+## ✅ Project 1 – NGINX Deployment, Service & Ingress
+
+### Objective
+
+Deploy a simple NGINX application and expose it using Kubernetes networking.
+
+### Concepts Covered
+
+* Deployments
+* ReplicaSets
+* Services
+* NodePort
+* ClusterIP
+* Ingress
+* Labels & Selectors
+* Namespace Management
+
+### Outcome
+
+* Deployed an NGINX application with multiple replicas.
+* Exposed the application using both Service and Ingress.
+* Configured local hostname (`nginx.local`) for browser access.
+* Learned Kubernetes networking fundamentals.
 
 ---
 
-# Project 1 – Deploying NGINX
+## ✅ Project 2 – ConfigMaps
 
-## Objective
+### Objective
 
-Deploy a highly available NGINX application on Kubernetes and expose it using Kubernetes networking resources.
+Externalize application configuration using ConfigMaps.
 
-### Kubernetes Resources
+### Concepts Covered
 
-* Namespace
-* Deployment
-* Service
-* Ingress
-* NGINX Ingress Controller
+* ConfigMaps
+* Volume Mounts
+* Configuration Management
 
-### What I Learned
-
-* Creating and managing Namespaces
-* Deploying applications using Deployments
-* Managing multiple Pod replicas
-* Exposing applications using Services
-* Configuring Ingress resources
-* Understanding Kubernetes networking
-* Troubleshooting Ingress and Minikube networking
-
----
-
-# Project 2 – ConfigMaps
-
-## Objective
-
-Externalize application configuration by replacing the default NGINX welcome page with a custom HTML page stored in a Kubernetes ConfigMap.
-
-### Kubernetes Resources
-
-* ConfigMap
-* Deployment (updated)
-* Service
-* Ingress
-
-### Implementation
+### Outcome
 
 * Created a ConfigMap containing a custom `index.html`.
 * Mounted the ConfigMap into the NGINX container.
-* Replaced the default NGINX page without rebuilding the container image.
-
-### What I Learned
-
-* Separating configuration from application images
-* Mounting ConfigMaps as volumes
-* Managing application configuration in Kubernetes
-* Rolling out Deployment updates after configuration changes
+* Updated the application without rebuilding the container image.
 
 ---
 
-# Project 3 – Persistent Storage
+## ✅ Project 3 – Persistent Storage
 
-## Objective
+### Objective
 
-Understand how Kubernetes provides persistent storage that survives Pod restarts and recreations.
+Understand Kubernetes persistent storage.
 
-### Kubernetes Resources
+### Concepts Covered
 
-* Persistent Volume (PV)
-* Persistent Volume Claim (PVC)
-* Deployment (updated)
+* PersistentVolume (PV)
+* PersistentVolumeClaim (PVC)
+* Volume Mounts
+* Persistent Storage
 
-### Implementation
+### Outcome
 
-* Created a Persistent Volume.
-* Created a Persistent Volume Claim.
-* Mounted the PVC into the NGINX container.
-* Created the website content directly on the mounted volume.
-* Verified that the content persisted after deleting and recreating Pods.
-
-### What I Learned
-
-* Difference between ephemeral and persistent storage
-* Persistent Volumes and Persistent Volume Claims
-* Volume mounting in Kubernetes
-* Data persistence across Pod recreation
-* Relationship between Pods, PVCs, and PVs
+* Created a PersistentVolume and PersistentVolumeClaim.
+* Mounted persistent storage into the NGINX container.
+* Learned the relationship between Pods, PVCs and PVs.
 
 ---
 
-# Architecture Evolution
+## ✅ Project 4 – Kubernetes Secrets
 
-### Project 1
+### Objective
 
-```text
-Client
-   │
-Ingress
-   │
-Service
-   │
-Deployment
-   │
-Pods
-```
+Securely inject sensitive information into applications.
 
-### Project 2
+### Concepts Covered
 
-```text
-ConfigMap
-     │
-Mounted into
-     │
-NGINX Pod
-```
+* Secrets
+* Environment Variables
+* Secret References
 
-### Project 3
+### Outcome
 
-```text
-Persistent Volume
-        │
-Persistent Volume Claim
-        │
-Mounted into
-        │
-NGINX Pod
-```
+* Created Kubernetes Secrets.
+* Injected secret values into the application as environment variables.
+* Learned how applications securely consume credentials.
+
+> **Note:** Placeholder values are used in this repository. Replace them with your own values before deploying.
 
 ---
 
-# Repository Structure
+## ✅ Project 5 – Helm
 
-```text
-kubernetes-homelab/
-├── namespaces/
-├── nginx/
-│   ├── deployment.yaml
-│   ├── service.yaml
-│   ├── ingress.yaml
-│   ├── configmap.yaml
-│   ├── pv.yaml
-│   ├── pvc.yaml
-│   └── README.md
-├── docs/
-│   ├── project-1.md
-│   ├── project-2.md
-│   └── project-3.md
-└── README.md
-```
+### Objective
 
----
+Package Kubernetes manifests into a reusable Helm chart.
 
-# Key Skills Demonstrated
+### Concepts Covered
 
-* Kubernetes resource management
-* Application deployments
-* Service discovery
-* Ingress configuration
-* Configuration management using ConfigMaps
-* Persistent storage using PVs and PVCs
-* Volume mounts
-* Kubernetes networking
-* Troubleshooting Kubernetes workloads in a local Minikube environment
-
----
-
-# Future Enhancements
-
-* Kubernetes Secrets
 * Helm Charts
-* StatefulSets
-* Prometheus
-* Grafana
-* Loki
-* Argo CD
-* GitHub Actions CI/CD
-* Horizontal Pod Autoscaler (HPA)
-* Network Policies
-* Multi-container Pods
-* Kubernetes Operators
+* Chart.yaml
+* values.yaml
+* Templates
+* Helm Install
+* Helm Upgrade
+* Helm Rollback
+* Helm Release Management
+
+### Outcome
+
+* Converted manually created Kubernetes manifests into a Helm chart.
+* Parameterized deployments using `values.yaml`.
+* Successfully deployed the application with Helm.
+* Managed application upgrades through Helm releases.
+* Learned how Helm templates render into standard Kubernetes manifests.
 
 ---
 
-## Learning Outcome
+# 📂 Repository Structure
 
-This repository is being developed as a progressive Kubernetes homelab to strengthen practical Kubernetes administration skills through hands-on projects. Each project builds on previous concepts while introducing new Kubernetes resources and operational practices commonly used in production environments.
+```text
+.
+├── project1-basic-nginx/
+├── project2-configmap/
+├── project3-persistent-storage/
+├── project4-secrets/
+├── project5-helm/
+├── README.md
+```
+
+---
+
+# 🚀 Running the Projects
+
+### Clone the repository
+
+```bash
+git clone https://github.com/<your-github-username>/kubernetes-homelab.git
+
+cd kubernetes-homelab
+```
+
+### Start Minikube
+
+```bash
+minikube start
+```
+
+### Enable Ingress
+
+```bash
+minikube addons enable ingress
+```
+
+### Deploy with kubectl (Projects 1–4)
+
+```bash
+kubectl apply -f .
+```
+
+### Deploy with Helm (Project 5)
+
+```bash
+helm install my-nginx ./project5-helm/nginx \
+  -n homelab \
+  --create-namespace
+```
+
+Upgrade after modifying `values.yaml`:
+
+```bash
+helm upgrade my-nginx ./project5-helm/nginx -n homelab
+```
+
+View release history:
+
+```bash
+helm history my-nginx -n homelab
+```
+
+Rollback if needed:
+
+```bash
+helm rollback my-nginx <revision> -n homelab
+```
+
+---
+
+# 📖 Key Learnings
+
+* Kubernetes object lifecycle
+* Declarative infrastructure
+* Application networking
+* Persistent storage
+* Configuration management
+* Secret management
+* Helm templating
+* Helm release management
+* Kubernetes troubleshooting
+* Infrastructure as Code (IaC)
+
+---
+
+# 🎯 Upcoming Projects
+
+* ⏳ Project 6 – Kubernetes Monitoring (Prometheus & Grafana)
+* ⏳ Project 7 – Horizontal Pod Autoscaler (HPA)
+* ⏳ Project 8 – RBAC
+* ⏳ Project 9 – Network Policies
+* ⏳ Project 10 – Argo CD (GitOps)
+* ⏳ Project 11 – GitHub Actions CI/CD
+* ⏳ Project 12 – Loki + Fluent Bit Logging
+* ⏳ Project 13 – Cert Manager & TLS
+* ⏳ Project 14 – Production-ready Kubernetes Application
+
+---
+
+## ⭐ About This Repository
+
+This repository is part of my continuous learning journey in Kubernetes, Platform Engineering and Site Reliability Engineering (SRE). Each project focuses on solving a real operational problem while following production-oriented Kubernetes practices.
