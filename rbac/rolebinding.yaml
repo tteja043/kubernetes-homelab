@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+
+metadata:
+  name: homelab-viewer-binding
+  namespace: homelab
+
+subjects:
+- kind: ServiceAccount
+  name: homelab-viewer
+  namespace: homelab
+
+roleRef:
+  kind: Role
+  name: homelab-readonly
+  apiGroup: rbac.authorization.k8s.io
